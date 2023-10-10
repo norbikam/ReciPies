@@ -80,11 +80,11 @@ export default function Home() {
           padding: "15px",
         }}
       >
-        <h1 style={{ fontSize: "120%", fontWeight: "bold" }}>
-          Add your recipe:
-        </h1>
-        <br></br>
         <form>
+          <h1 style={{ fontSize: "120%", fontWeight: "bold" }}>
+            Add your recipe:
+          </h1>
+          <br></br>
           <Input
             type="text"
             placeholder="Recipe Name..."
