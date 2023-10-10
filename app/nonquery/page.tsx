@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 
 import { useEffect, useState } from "react";
 import { Box, Table, Td, Th, Tr } from "@chakra-ui/react";
@@ -108,3 +108,4 @@ export default function Home() {
     </main>
   );
 }
+*/
