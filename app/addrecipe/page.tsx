@@ -74,8 +74,10 @@ export default function Home() {
           justifyItems: "center",
           alignItems: "center",
           alignContent: "center",
+          textAlign: "center",
         }}
       >
+        <h1 style={{ fontSize: "120%" }}>Add your recipe:</h1>
         <form>
           <Input
             type="text"
