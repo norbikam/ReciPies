@@ -2,10 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
+
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-start-rgb: 114, 119, 120;
+  --background-end-rgb: 155, 155, 155;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,11 +19,24 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: black;
+  background-color: rgb(221, 217, 217);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.navBar {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  background-color: rgb(255, 255, 255);
+  padding: 5;
+}
+.navBar h1 {
+  padding: 0.5vw;
+  font-size: 150%;
+}
+Th {
+  padding: 5px;
+}
+h1 {
+  padding: 10px;
 }

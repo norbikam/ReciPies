@@ -1,18 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Box, Table, Td, Th, Tr } from "@chakra-ui/react";
 import {
   createClient,
   SupabaseClient,
   PostgrestResponse,
 } from "@supabase/supabase-js";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
-import { fetchRecipes } from "./fetches/fetchrecipes";
+import { QueryClient, useQueryClient } from "@tanstack/react-query";
 
 export interface DatabaseResponse {
   results: Recipe[];
@@ -33,17 +28,28 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const queryClient = new QueryClient();
 
 function FeedPage() {
-  const query = useQuery(["recipes"], fetchRecipes);
+  const [recipes, setRecipes] = useState<DatabaseResponse | null>(null);
 
-  if (query.isLoading) return <div>Loading...</div>;
+  useEffect(() => {
+    getRecipes();
+  }, []);
 
-  if (query.isError) return <div>Error fetching data</div>;
-
-  if (!query.data || !query.data.results) return null;
+  async function getRecipes() {
+    console.log("Fetching recipes...");
+    let { data, error } = await supabase
+      .from("recipes")
+      .select("recipe_name, cook_time, prep_time, ingredients, directions");
+    console.log("Received data: ", data);
+    if (data) {
+      setRecipes({ results: data });
+    } else {
+      setRecipes({ results: [] });
+    }
+  }
 
   return (
     <ul>
-      {query.data.results.map((recipe, index) => (
+      {recipes?.results.map((recipe, index) => (
         <Box
           style={{
             background: "#e8e8e8",
@@ -54,9 +60,8 @@ function FeedPage() {
             border: "2px solid gray",
             maxWidth: "80vw",
           }}
-          key={index}
         >
-          <div>
+          <div key={index}>
             <h1 style={{ textAlign: "center", fontSize: "150%" }}>
               {recipe.recipe_name}
             </h1>
@@ -94,23 +99,12 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div
         className="navBar"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          paddingLeft: "10px",
-          paddingRight: "10px",
-        }}
+        style={{ display: "flex", justifyContent: "space-between" }}
       >
-        <a href="/">
-          <h1>Recipes</h1>
-        </a>
-        <a href="addrecipe">
-          <h1>Add recipe</h1>
-        </a>
+        <h1>Recipies</h1>
+        <h1>Your recipes</h1>
       </div>
-      <QueryClientProvider client={queryClient}>
-        <FeedPage />
-      </QueryClientProvider>
+      <FeedPage />
     </main>
   );
 }
