@@ -92,6 +92,7 @@ function FeedPage() {
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
       <div
         className="navBar"
         style={{
