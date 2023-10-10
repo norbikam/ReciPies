@@ -75,9 +75,15 @@ export default function Home() {
           alignItems: "center",
           alignContent: "center",
           textAlign: "center",
+          borderRadius: "10px",
+          border: "1px solid black",
+          padding: "15px",
         }}
       >
-        <h1 style={{ fontSize: "120%" }}>Add your recipe:</h1>
+        <h1 style={{ fontSize: "120%", fontWeight: "bold" }}>
+          Add your recipe:
+        </h1>
+        <br></br>
         <form>
           <Input
             type="text"
